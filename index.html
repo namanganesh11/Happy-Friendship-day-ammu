@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Happy Friendship Day ✨</title>
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background-color: #05020a;
+      color: #fff;
+      min-height: 100vh;
+      overflow-x: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+    }
+
+    /* 1. PINK DIGITAL RAIN CANVAS */
+    #pinkRainCanvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: 1;
+    }
+
+    /* CONTAINER STYLING */
+    .container {
+      position: relative;
+      z-index: 10;
+      width: 90%;
+      max-width: 850px;
+      text-align: center;
+      background: rgba(18, 5, 25, 0.85);
+      backdrop-filter: blur(14px);
+      padding: 40px 25px;
+      border-radius: 24px;
+      border: 1px solid rgba(244, 114, 182, 0.3);
+      box-shadow: 0 0 35px rgba(236, 72, 153, 0.25);
+      margin: 20px 0;
+    }
+
+    /* PAGE 1 */
+    #page1 h1 {
+      font-size: 2.8rem;
+      color: #f472b6;
+      text-shadow: 0 0 15px rgba(244, 114, 182, 0.8), 0 0 30px rgba(236, 72, 153, 0.4);
+      margin-bottom: 12px;
+      letter-spacing: 1px;
+    }
+
+    #page1 p.sub-text {
+      font-size: 1.4rem;
+      color: #fbcfe8;
+      text-shadow: 0 0 8px rgba(251, 207, 232, 0.5);
+      margin-bottom: 70px;
+    }
+
+    /* BUTTON ZONE */
+    .button-zone {
+      position: relative;
+      width: 100%;
+      height: 140px;
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+    }
+
+    .btn {
+      padding: 14px 40px;
+      font-size: 1.25rem;
+      font-weight: 700;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      user-select: none;
+      box-shadow: 0 0 20px rgba(236, 72, 153, 0.4);
+    }
+
+    /* YES BUTTON */
+    #yesBtn {
+      background: linear-gradient(135deg, #ec4899, #f43f5e);
+      color: white;
+      z-index: 5;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    #yesBtn:hover {
+      transform: scale(1.1);
+      box-shadow: 0 0 30px rgba(244, 63, 94, 0.8);
+    }
+
+    /* NO BUTTON */
+    #noBtn {
+      position: absolute;
+      background: #334155;
+      color: #94a3b8;
+      z-index: 10;
+      transition: left 0.15s ease-out, top 0.15s ease-out;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    /* PAGE 2 */
+    #page2 {
+      display: none;
+      max-height: 85vh;
+      overflow-y: auto;
+    }
+
+    .quote-box {
+      background: rgba(255, 255, 255, 0.05);
+      border-left: 4px solid #f472b6;
+      border-radius: 8px;
+      padding: 15px 20px;
+      margin-bottom: 25px;
+      color: #fbcfe8;
+      font-style: italic;
+      font-size: 1.1rem;
+      line-height: 1.5;
+    }
+
+    .main-wish {
+      font-size: 2.6rem;
+      color: #f472b6;
+      text-shadow: 0 0 20px rgba(244, 114, 182, 0.9), 0 0 35px rgba(236, 72, 153, 0.6);
+      margin-bottom: 20px;
+    }
+
+    /* PHOTO GRID */
+    .photo-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 18px;
+      margin-top: 20px;
+    }
+
+    .photo-card {
+      background: rgba(30, 20, 40, 0.9);
+      border-radius: 18px;
+      padding: 12px;
+      border: 1px solid rgba(244, 114, 182, 0.4);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.6);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .photo-card img {
+      width: 100%;
+      height: 190px;
+      object-fit: cover;
+      border-radius: 12px;
+      margin-bottom: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      pointer-events: none; /* Prevents dragging/editing */
+    }
+
+    .photo-card .caption {
+      color: #fbcfe8;
+      font-size: 0.95rem;
+      line-height: 1.4;
+      font-style: italic;
+      text-align: center;
+    }
+
+    /* PLUS (+) UPLOAD TILE */
+    .add-photo-card {
+      background: rgba(244, 114, 182, 0.08);
+      border: 2px dashed #f472b6;
+      border-radius: 18px;
+      min-height: 250px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .add-photo-card:hover {
+      background: rgba(244, 114, 182, 0.2);
+      transform: scale(1.02);
+      border-color: #ec4899;
+    }
+
+    .plus-icon {
+      font-size: 3.5rem;
+      color: #f472b6;
+      line-height: 1;
+      user-select: none;
+      text-shadow: 0 0 15px rgba(244, 114, 182, 0.8);
+    }
+
+    #photoInput {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+  <canvas id="pinkRainCanvas"></canvas>
+
+  <div class="container">
+    <!-- PAGE 1 -->
+    <div id="page1">
+      <h1>Happy Friendship Day</h1>
+      <p class="sub-text">Will you be my friend forever?</p>
+
+      <div class="button-zone" id="btnZone">
+        <button class="btn" id="yesBtn" onclick="goToPage2()">YES! ❤️</button>
+        <button class="btn" id="noBtn">NO 😜</button>
+      </div>
+    </div>
+
+    <!-- PAGE 2 -->
+    <div id="page2">
+      <div class="quote-box">
+        "Friendship is not about who you've known the longest... It's about who came into your life, said 'I'm here for you,' and proved it." ✨
+      </div>
+
+      <!-- MAIN FRIENDSHIP DAY WISH -->
+      <h1 class="main-wish">Happy Friendship Day! 💖</h1>
+
+      <!-- HIDDEN FILE INPUT -->
+      <input type="file" id="photoInput" accept="image/*" multiple onchange="handlePhotos(event)" />
+
+      <!-- PHOTO GRID DISPLAY -->
+      <div class="photo-grid" id="photoGrid"></div>
+    </div>
+  </div>
+
+  <script>
+    /* 1. CLEAR PREVIOUS LOCALSTORAGE DATA ON LOAD */
+    localStorage.removeItem('friendship_photos_fresh_v2');
+    localStorage.removeItem('friendship_photos_locked');
+    localStorage.removeItem('ammrutha_photos_locked');
+    localStorage.removeItem('chinmudra_photos_final');
+
+    /* 2. PINK RAIN MATRIX ANIMATION */
+    const canvas = document.getElementById('pinkRainCanvas');
+    const ctx = canvas.getContext('2d');
+
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    resizeCanvas();
+
+    const pinkChars = '0123456789ABCDEFGHJKLMNPQRSTUVWXYZ💕✨🌸💖';
+    const fontSize = 16;
+    let columns = Math.floor(canvas.width / fontSize);
+    let drops = Array(columns).fill(1);
+
+    function drawPinkRain() {
+      ctx.fillStyle = 'rgba(5, 2, 10, 0.08)';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      ctx.fillStyle = '#f472b6';
+      ctx.font = fontSize + 'px monospace';
+
+      for (let i = 0; i < drops.length; i++) {
+        const text = pinkChars.charAt(Math.floor(Math.random() * pinkChars.length));
+        ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+
+        if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+          drops[i] = 0;
+        }
+        drops[i]++;
+      }
+    }
+    setInterval(drawPinkRain, 33);
+
+    window.addEventListener('resize', () => {
+      resizeCanvas();
+      columns = Math.floor(canvas.width / fontSize);
+      drops = Array(columns).fill(1);
+    });
+
+    /* 3. DODGE LOGIC FOR NO BUTTON */
+    const noBtn = document.getElementById('noBtn');
+    const btnZone = document.getElementById('btnZone');
+
+    function resetNoPosition() {
+      noBtn.style.left = `calc(50% + 100px)`;
+      noBtn.style.top = `20px`;
+    }
+    resetNoPosition();
+
+    function moveNoBtnAway() {
+      const zoneRect = btnZone.getBoundingClientRect();
+      const btnRect = noBtn.getBoundingClientRect();
+
+      const maxX = Math.max(0, zoneRect.width - btnRect.width);
+      const maxY = Math.max(0, zoneRect.height - btnRect.height);
+
+      let newX = Math.random() * maxX;
+      let newY = Math.random() * maxY;
+
+      noBtn.style.left = `${newX}px`;
+      noBtn.style.top = `${newY}px`;
+    }
+
+    noBtn.addEventListener('mouseenter', moveNoBtnAway);
+    noBtn.addEventListener('touchstart', (e) => {
+      e.preventDefault();
+      moveNoBtnAway();
+    });
+
+    /* 4. NAVIGATION & CONFETTI */
+    function goToPage2() {
+      document.getElementById('page1').style.display = 'none';
+      document.getElementById('page2').style.display = 'block';
+
+      confetti({
+        particleCount: 160,
+        spread: 90,
+        origin: { y: 0.5 },
+        colors: ['#f472b6', '#ec4899', '#ffffff']
+      });
+
+      loadPhotos();
+    }
+
+    /* 5. PERMANENT LOCKED PHOTO MANAGEMENT */
+    const photoCaptions = [
+      "\"In the story of my life, having you as a friend is my absolute favorite chapter.\" ✨",
+      "\"True friendship isn't about being inseparable—it's knowing nothing changes even when life gets busy.\" 💖",
+      "\"Through every high and low, thank you for being my constant light and strength.\" 🌸",
+      "\"Good times become unforgettable memories simply because you are there to share them.\" 🥳",
+      "\"Here's to forever being each other's person. Happy Friendship Day!\" 🎉"
+    ];
+
+    async function handlePhotos(event) {
+      const files = Array.from(event.target.files);
+      let savedPhotos = JSON.parse(localStorage.getItem('friendship_photos_fresh_v2') || '[]');
+
+      for (const file of files) {
+        if (savedPhotos.length >= 5) break;
+
+        const base64Data = await readFileAsDataURL(file);
+        savedPhotos.push({
+          imgSrc: base64Data,
+          caption: photoCaptions[savedPhotos.length] || "Special Memory ✨"
+        });
+      }
+
+      localStorage.setItem('friendship_photos_fresh_v2', JSON.stringify(savedPhotos));
+      loadPhotos();
+      event.target.value = '';
+    }
+
+    function readFileAsDataURL(file) {
+      return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = (e) => resolve(e.target.result);
+        reader.onerror = (err) => reject(err);
+        reader.readAsDataURL(file);
+      });
+    }
+
+    function loadPhotos() {
+      const grid = document.getElementById('photoGrid');
+      grid.innerHTML = '';
+
+      let savedPhotos = JSON.parse(localStorage.getItem('friendship_photos_fresh_v2') || '[]');
+
+      // Render permanently uploaded photo cards
+      savedPhotos.forEach(item => {
+        const card = document.createElement('div');
+        card.className = 'photo-card';
+        card.innerHTML = `
+          <img src="${item.imgSrc}" alt="Friendship Memory" />
+          <p class="caption">${item.caption}</p>
+        `;
+        grid.appendChild(card);
+      });
+
+      // Show '+' tile if fewer than 5 photos uploaded
+      if (savedPhotos.length < 5) {
+        const addCard = document.createElement('div');
+        addCard.className = 'add-photo-card';
+        addCard.onclick = () => document.getElementById('photoInput').click();
+        addCard.innerHTML = `<span class="plus-icon">+</span>`;
+        grid.appendChild(addCard);
+      }
+    }
+  </script>
+</body>
+</html>
