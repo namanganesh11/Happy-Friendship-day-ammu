@@ -38,12 +38,12 @@
     .container {
       position: relative;
       z-index: 10;
-      width: 90%;
-      max-width: 850px;
+      width: 95%;
+      max-width: 950px;
       text-align: center;
-      background: rgba(18, 5, 25, 0.85);
+      background: rgba(18, 5, 25, 0.88);
       backdrop-filter: blur(14px);
-      padding: 40px 25px;
+      padding: 35px 20px;
       border-radius: 24px;
       border: 1px solid rgba(244, 114, 182, 0.3);
       box-shadow: 0 0 35px rgba(236, 72, 153, 0.25);
@@ -87,7 +87,6 @@
       box-shadow: 0 0 20px rgba(236, 72, 153, 0.4);
     }
 
-    /* YES BUTTON */
     #yesBtn {
       background: linear-gradient(135deg, #ec4899, #f43f5e);
       color: white;
@@ -100,7 +99,6 @@
       box-shadow: 0 0 30px rgba(244, 63, 94, 0.8);
     }
 
-    /* NO BUTTON */
     #noBtn {
       position: absolute;
       background: #334155;
@@ -113,7 +111,7 @@
     /* PAGE 2 */
     #page2 {
       display: none;
-      max-height: 85vh;
+      max-height: 88vh;
       overflow-y: auto;
     }
 
@@ -121,64 +119,99 @@
       background: rgba(255, 255, 255, 0.05);
       border-left: 4px solid #f472b6;
       border-radius: 8px;
-      padding: 15px 20px;
+      padding: 12px 18px;
       margin-bottom: 25px;
       color: #fbcfe8;
       font-style: italic;
-      font-size: 1.1rem;
-      line-height: 1.5;
+      font-size: 1.05rem;
+      line-height: 1.4;
+    }
+
+    /* 3x3 SURROUNDING GRID LAYOUT */
+    .surrounding-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      align-items: center;
+    }
+
+    /* TOP ROW SPAN FOR 2 PHOTOS */
+    .top-row-wrapper {
+      grid-column: span 3;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+      margin-bottom: 8px;
+    }
+
+    @media (max-width: 768px) {
+      .surrounding-grid, .top-row-wrapper {
+        grid-template-columns: 1fr;
+      }
+      .top-row-wrapper {
+        grid-column: span 1;
+      }
+    }
+
+    /* CENTER WISH CARD */
+    .center-wish-card {
+      background: rgba(244, 114, 182, 0.08);
+      border: 1px solid rgba(244, 114, 182, 0.35);
+      border-radius: 20px;
+      padding: 30px 15px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      min-height: 220px;
+      box-shadow: inset 0 0 20px rgba(236, 72, 153, 0.2);
     }
 
     .main-wish {
-      font-size: 2.6rem;
+      font-size: 2.2rem;
       color: #f472b6;
       text-shadow: 0 0 20px rgba(244, 114, 182, 0.9), 0 0 35px rgba(236, 72, 153, 0.6);
-      margin-bottom: 20px;
+      line-height: 1.3;
     }
 
-    /* PHOTO GRID */
-    .photo-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 18px;
-      margin-top: 20px;
-    }
-
+    /* UPLOADED PHOTO CARD */
     .photo-card {
       background: rgba(30, 20, 40, 0.9);
       border-radius: 18px;
-      padding: 12px;
+      padding: 10px;
       border: 1px solid rgba(244, 114, 182, 0.4);
       box-shadow: 0 4px 20px rgba(0,0,0,0.6);
       display: flex;
       flex-direction: column;
       align-items: center;
+      height: 220px;
+      justify-content: center;
     }
 
     .photo-card img {
       width: 100%;
-      height: 190px;
+      height: 150px;
       object-fit: cover;
       border-radius: 12px;
-      margin-bottom: 12px;
+      margin-bottom: 8px;
       border: 1px solid rgba(255, 255, 255, 0.1);
-      pointer-events: none; /* Prevents dragging/editing */
+      pointer-events: none;
     }
 
     .photo-card .caption {
       color: #fbcfe8;
-      font-size: 0.95rem;
-      line-height: 1.4;
+      font-size: 0.85rem;
+      line-height: 1.3;
       font-style: italic;
       text-align: center;
     }
 
-    /* PLUS (+) UPLOAD TILE */
-    .add-photo-card {
-      background: rgba(244, 114, 182, 0.08);
+    /* PLUS (+) ICON BOX */
+    .add-slot-card {
+      background: rgba(244, 114, 182, 0.06);
       border: 2px dashed #f472b6;
       border-radius: 18px;
-      min-height: 250px;
+      height: 220px;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -186,21 +219,32 @@
       transition: all 0.3s ease;
     }
 
-    .add-photo-card:hover {
-      background: rgba(244, 114, 182, 0.2);
+    .add-slot-card:hover {
+      background: rgba(244, 114, 182, 0.18);
       transform: scale(1.02);
       border-color: #ec4899;
     }
 
     .plus-icon {
-      font-size: 3.5rem;
+      font-size: 3.2rem;
       color: #f472b6;
       line-height: 1;
       user-select: none;
       text-shadow: 0 0 15px rgba(244, 114, 182, 0.8);
     }
 
-    #photoInput {
+    /* BOTTOM SLOT CENTERING */
+    .bottom-slot-wrapper {
+      grid-column: 2;
+    }
+
+    @media (max-width: 768px) {
+      .bottom-slot-wrapper {
+        grid-column: 1;
+      }
+    }
+
+    #fileInput {
       display: none;
     }
   </style>
@@ -223,29 +267,42 @@
 
     <!-- PAGE 2 -->
     <div id="page2">
+      <!-- QUOTE BOX -->
       <div class="quote-box">
         "Friendship is not about who you've known the longest... It's about who came into your life, said 'I'm here for you,' and proved it." ✨
       </div>
 
-      <!-- MAIN FRIENDSHIP DAY WISH -->
-      <h1 class="main-wish">Happy Friendship Day! 💖</h1>
-
       <!-- HIDDEN FILE INPUT -->
-      <input type="file" id="photoInput" accept="image/*" multiple onchange="handlePhotos(event)" />
+      <input type="file" id="fileInput" accept="image/*" onchange="uploadToSlot(event)" />
 
-      <!-- PHOTO GRID DISPLAY -->
-      <div class="photo-grid" id="photoGrid"></div>
+      <!-- SURROUNDING GRID (PHOTOS AROUND WISH) -->
+      <div class="surrounding-grid">
+        <!-- TOP ROW: SLOT 0 & SLOT 1 -->
+        <div class="top-row-wrapper">
+          <div id="slot-0"></div>
+          <div id="slot-1"></div>
+        </div>
+
+        <!-- MIDDLE ROW: SLOT 2 | WISH | SLOT 3 -->
+        <div id="slot-2"></div>
+
+        <div class="center-wish-card">
+          <h1 class="main-wish">Happy Friendship Day! 💖</h1>
+        </div>
+
+        <div id="slot-3"></div>
+
+        <!-- BOTTOM ROW: SLOT 4 -->
+        <div class="bottom-slot-wrapper" id="slot-4"></div>
+      </div>
     </div>
   </div>
 
   <script>
-    /* 1. CLEAR PREVIOUS LOCALSTORAGE DATA ON LOAD */
-    localStorage.removeItem('friendship_photos_fresh_v2');
-    localStorage.removeItem('friendship_photos_locked');
-    localStorage.removeItem('ammrutha_photos_locked');
-    localStorage.removeItem('chinmudra_photos_final');
+    /* CLEAR OLD STORAGE ON FRESH LOAD */
+    localStorage.removeItem('friendship_grid_around_wish');
 
-    /* 2. PINK RAIN MATRIX ANIMATION */
+    /* 1. PINK RAIN MATRIX ANIMATION */
     const canvas = document.getElementById('pinkRainCanvas');
     const ctx = canvas.getContext('2d');
 
@@ -285,7 +342,7 @@
       drops = Array(columns).fill(1);
     });
 
-    /* 3. DODGE LOGIC FOR NO BUTTON */
+    /* 2. DODGE LOGIC FOR NO BUTTON */
     const noBtn = document.getElementById('noBtn');
     const btnZone = document.getElementById('btnZone');
 
@@ -315,7 +372,7 @@
       moveNoBtnAway();
     });
 
-    /* 4. NAVIGATION & CONFETTI */
+    /* 3. NAVIGATION & CONFETTI */
     function goToPage2() {
       document.getElementById('page1').style.display = 'none';
       document.getElementById('page2').style.display = 'block';
@@ -327,10 +384,11 @@
         colors: ['#f472b6', '#ec4899', '#ffffff']
       });
 
-      loadPhotos();
+      renderSlots();
     }
 
-    /* 5. PERMANENT LOCKED PHOTO MANAGEMENT */
+    /* 4. PHOTO SLOT MANAGEMENT */
+    let activeSlotIndex = null;
     const photoCaptions = [
       "\"In the story of my life, having you as a friend is my absolute favorite chapter.\" ✨",
       "\"True friendship isn't about being inseparable—it's knowing nothing changes even when life gets busy.\" 💖",
@@ -339,22 +397,25 @@
       "\"Here's to forever being each other's person. Happy Friendship Day!\" 🎉"
     ];
 
-    async function handlePhotos(event) {
-      const files = Array.from(event.target.files);
-      let savedPhotos = JSON.parse(localStorage.getItem('friendship_photos_fresh_v2') || '[]');
+    function openPicker(index) {
+      activeSlotIndex = index;
+      document.getElementById('fileInput').click();
+    }
 
-      for (const file of files) {
-        if (savedPhotos.length >= 5) break;
+    async function uploadToSlot(event) {
+      const file = event.target.files[0];
+      if (!file || activeSlotIndex === null) return;
 
-        const base64Data = await readFileAsDataURL(file);
-        savedPhotos.push({
-          imgSrc: base64Data,
-          caption: photoCaptions[savedPhotos.length] || "Special Memory ✨"
-        });
-      }
+      let slots = JSON.parse(localStorage.getItem('friendship_grid_around_wish') || '[]');
+      
+      const base64 = await readFileAsDataURL(file);
+      slots[activeSlotIndex] = {
+        imgSrc: base64,
+        caption: photoCaptions[activeSlotIndex] || "Special Memory ✨"
+      };
 
-      localStorage.setItem('friendship_photos_fresh_v2', JSON.stringify(savedPhotos));
-      loadPhotos();
+      localStorage.setItem('friendship_grid_around_wish', JSON.stringify(slots));
+      renderSlots();
       event.target.value = '';
     }
 
@@ -367,30 +428,29 @@
       });
     }
 
-    function loadPhotos() {
-      const grid = document.getElementById('photoGrid');
-      grid.innerHTML = '';
+    function renderSlots() {
+      let slots = JSON.parse(localStorage.getItem('friendship_grid_around_wish') || '[]');
 
-      let savedPhotos = JSON.parse(localStorage.getItem('friendship_photos_fresh_v2') || '[]');
+      for (let i = 0; i < 5; i++) {
+        const slotElem = document.getElementById(`slot-${i}`);
+        if (!slotElem) continue;
 
-      // Render permanently uploaded photo cards
-      savedPhotos.forEach(item => {
-        const card = document.createElement('div');
-        card.className = 'photo-card';
-        card.innerHTML = `
-          <img src="${item.imgSrc}" alt="Friendship Memory" />
-          <p class="caption">${item.caption}</p>
-        `;
-        grid.appendChild(card);
-      });
-
-      // Show '+' tile if fewer than 5 photos uploaded
-      if (savedPhotos.length < 5) {
-        const addCard = document.createElement('div');
-        addCard.className = 'add-photo-card';
-        addCard.onclick = () => document.getElementById('photoInput').click();
-        addCard.innerHTML = `<span class="plus-icon">+</span>`;
-        grid.appendChild(addCard);
+        if (slots[i] && slots[i].imgSrc) {
+          // Permanently locked uploaded image
+          slotElem.innerHTML = `
+            <div class="photo-card">
+              <img src="${slots[i].imgSrc}" alt="Friendship Memory" />
+              <p class="caption">${slots[i].caption}</p>
+            </div>
+          `;
+        } else {
+          // Plus (+) icon tile
+          slotElem.innerHTML = `
+            <div class="add-slot-card" onclick="openPicker(${i})">
+              <span class="plus-icon">+</span>
+            </div>
+          `;
+        }
       }
     }
   </script>
