@@ -43,8 +43,8 @@
       text-align: center;
       background: rgba(18, 5, 25, 0.88);
       backdrop-filter: blur(14px);
-      padding: 35px 20px;
-      border-radius: 24px;
+      padding: 30px 20px;
+      border-radius: 28px;
       border: 1px solid rgba(244, 114, 182, 0.3);
       box-shadow: 0 0 35px rgba(236, 72, 153, 0.25);
       margin: 20px 0;
@@ -111,7 +111,7 @@
     /* PAGE 2 */
     #page2 {
       display: none;
-      max-height: 88vh;
+      max-height: 90vh;
       overflow-y: auto;
     }
 
@@ -119,128 +119,149 @@
       background: rgba(255, 255, 255, 0.05);
       border-left: 4px solid #f472b6;
       border-radius: 8px;
-      padding: 12px 18px;
-      margin-bottom: 25px;
+      padding: 10px 16px;
+      margin-bottom: 15px;
       color: #fbcfe8;
       font-style: italic;
-      font-size: 1.05rem;
+      font-size: 1rem;
       line-height: 1.4;
     }
 
-    /* 3x3 SURROUNDING GRID LAYOUT */
-    .surrounding-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 16px;
+    /* CIRCULAR STAGE LAYOUT */
+    .circle-stage {
+      position: relative;
+      width: 100%;
+      height: 620px;
+      display: flex;
+      justify-content: center;
       align-items: center;
-    }
-
-    /* TOP ROW SPAN FOR 2 PHOTOS */
-    .top-row-wrapper {
-      grid-column: span 3;
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 16px;
-      margin-bottom: 8px;
-    }
-
-    @media (max-width: 768px) {
-      .surrounding-grid, .top-row-wrapper {
-        grid-template-columns: 1fr;
-      }
-      .top-row-wrapper {
-        grid-column: span 1;
-      }
+      margin-top: 10px;
     }
 
     /* CENTER WISH CARD */
     .center-wish-card {
-      background: rgba(244, 114, 182, 0.08);
-      border: 1px solid rgba(244, 114, 182, 0.35);
-      border-radius: 20px;
-      padding: 30px 15px;
+      position: absolute;
+      z-index: 5;
+      width: 260px;
+      height: 260px;
+      background: rgba(244, 114, 182, 0.12);
+      border: 2px solid rgba(244, 114, 182, 0.5);
+      border-radius: 50%;
+      padding: 20px;
       display: flex;
-      flex-direction: column;
       justify-content: center;
       align-items: center;
-      min-height: 220px;
-      box-shadow: inset 0 0 20px rgba(236, 72, 153, 0.2);
+      text-align: center;
+      box-shadow: 0 0 30px rgba(236, 72, 153, 0.3), inset 0 0 20px rgba(236, 72, 153, 0.2);
+      backdrop-filter: blur(8px);
     }
 
     .main-wish {
-      font-size: 2.2rem;
+      font-size: 1.8rem;
       color: #f472b6;
-      text-shadow: 0 0 20px rgba(244, 114, 182, 0.9), 0 0 35px rgba(236, 72, 153, 0.6);
+      text-shadow: 0 0 15px rgba(244, 114, 182, 0.9), 0 0 25px rgba(236, 72, 153, 0.6);
       line-height: 1.3;
+    }
+
+    /* CIRCLE PHOTO SLOTS */
+    .slot-item {
+      position: absolute;
+      width: 150px;
+      height: 180px;
+      transform: translate(-50%, -50%);
+      transition: all 0.3s ease;
+      z-index: 10;
     }
 
     /* UPLOADED PHOTO CARD */
     .photo-card {
-      background: rgba(30, 20, 40, 0.9);
-      border-radius: 18px;
-      padding: 10px;
-      border: 1px solid rgba(244, 114, 182, 0.4);
-      box-shadow: 0 4px 20px rgba(0,0,0,0.6);
+      background: rgba(30, 20, 40, 0.92);
+      border-radius: 16px;
+      padding: 8px;
+      border: 1px solid rgba(244, 114, 182, 0.5);
+      box-shadow: 0 4px 18px rgba(0,0,0,0.7);
       display: flex;
       flex-direction: column;
       align-items: center;
-      height: 220px;
+      width: 100%;
+      height: 100%;
       justify-content: center;
     }
 
     .photo-card img {
       width: 100%;
-      height: 150px;
+      height: 110px;
       object-fit: cover;
-      border-radius: 12px;
-      margin-bottom: 8px;
-      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+      margin-bottom: 6px;
+      border: 1px solid rgba(255, 255, 255, 0.15);
       pointer-events: none;
     }
 
     .photo-card .caption {
       color: #fbcfe8;
-      font-size: 0.85rem;
-      line-height: 1.3;
+      font-size: 0.72rem;
+      line-height: 1.2;
       font-style: italic;
       text-align: center;
+      overflow: hidden;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
     }
 
-    /* PLUS (+) ICON BOX */
+    /* PLUS (+) ICON TILE */
     .add-slot-card {
-      background: rgba(244, 114, 182, 0.06);
+      background: rgba(244, 114, 182, 0.08);
       border: 2px dashed #f472b6;
-      border-radius: 18px;
-      height: 220px;
+      border-radius: 16px;
+      width: 100%;
+      height: 100%;
       display: flex;
       justify-content: center;
       align-items: center;
       cursor: pointer;
       transition: all 0.3s ease;
+      box-shadow: 0 0 15px rgba(244, 114, 182, 0.15);
     }
 
     .add-slot-card:hover {
-      background: rgba(244, 114, 182, 0.18);
-      transform: scale(1.02);
+      background: rgba(244, 114, 182, 0.22);
+      transform: scale(1.05);
       border-color: #ec4899;
     }
 
     .plus-icon {
-      font-size: 3.2rem;
+      font-size: 2.8rem;
       color: #f472b6;
       line-height: 1;
       user-select: none;
-      text-shadow: 0 0 15px rgba(244, 114, 182, 0.8);
+      text-shadow: 0 0 12px rgba(244, 114, 182, 0.8);
     }
 
-    /* BOTTOM SLOT CENTERING */
-    .bottom-slot-wrapper {
-      grid-column: 2;
-    }
-
-    @media (max-width: 768px) {
-      .bottom-slot-wrapper {
-        grid-column: 1;
+    @media (max-width: 600px) {
+      .circle-stage {
+        height: 500px;
+      }
+      .center-wish-card {
+        width: 190px;
+        height: 190px;
+      }
+      .main-wish {
+        font-size: 1.3rem;
+      }
+      .slot-item {
+        width: 110px;
+        height: 135px;
+      }
+      .photo-card img {
+        height: 75px;
+      }
+      .photo-card .caption {
+        font-size: 0.62rem;
+      }
+      .plus-icon {
+        font-size: 2.2rem;
       }
     }
 
@@ -275,32 +296,26 @@
       <!-- HIDDEN FILE INPUT -->
       <input type="file" id="fileInput" accept="image/*" onchange="uploadToSlot(event)" />
 
-      <!-- SURROUNDING GRID (PHOTOS AROUND WISH) -->
-      <div class="surrounding-grid">
-        <!-- TOP ROW: SLOT 0 & SLOT 1 -->
-        <div class="top-row-wrapper">
-          <div id="slot-0"></div>
-          <div id="slot-1"></div>
-        </div>
-
-        <!-- MIDDLE ROW: SLOT 2 | WISH | SLOT 3 -->
-        <div id="slot-2"></div>
-
+      <!-- CIRCLE STAGE (PHOTOS SURROUNDING WISH IN A CIRCLE) -->
+      <div class="circle-stage" id="circleStage">
+        <!-- CENTER WISH HEADER -->
         <div class="center-wish-card">
           <h1 class="main-wish">Happy Friendship Day! 💖</h1>
         </div>
 
-        <div id="slot-3"></div>
-
-        <!-- BOTTOM ROW: SLOT 4 -->
-        <div class="bottom-slot-wrapper" id="slot-4"></div>
+        <!-- 5 CIRCLE SLOTS -->
+        <div class="slot-item" id="slot-0"></div>
+        <div class="slot-item" id="slot-1"></div>
+        <div class="slot-item" id="slot-2"></div>
+        <div class="slot-item" id="slot-3"></div>
+        <div class="slot-item" id="slot-4"></div>
       </div>
     </div>
   </div>
 
   <script>
-    /* CLEAR OLD STORAGE ON FRESH LOAD */
-    localStorage.removeItem('friendship_grid_around_wish');
+    /* CLEAR PREVIOUS LOCALSTORAGE ON RELOAD */
+    localStorage.removeItem('friendship_circle_orbit_data');
 
     /* 1. PINK RAIN MATRIX ANIMATION */
     const canvas = document.getElementById('pinkRainCanvas');
@@ -340,6 +355,7 @@
       resizeCanvas();
       columns = Math.floor(canvas.width / fontSize);
       drops = Array(columns).fill(1);
+      positionSlotsInCircle();
     });
 
     /* 2. DODGE LOGIC FOR NO BUTTON */
@@ -384,10 +400,41 @@
         colors: ['#f472b6', '#ec4899', '#ffffff']
       });
 
+      positionSlotsInCircle();
       renderSlots();
     }
 
-    /* 4. PHOTO SLOT MANAGEMENT */
+    /* 4. CIRCULAR ORBIT CALCULATIONS */
+    function positionSlotsInCircle() {
+      const stage = document.getElementById('circleStage');
+      if (!stage) return;
+
+      const stageWidth = stage.clientWidth;
+      const stageHeight = stage.clientHeight;
+      const centerX = stageWidth / 2;
+      const centerY = stageHeight / 2;
+
+      // Adjust radius depending on screen width
+      const radius = window.innerWidth <= 600 ? 170 : 230;
+      const totalSlots = 5;
+
+      // Start from top angle (-90 deg in radians)
+      const startAngle = -Math.PI / 2;
+
+      for (let i = 0; i < totalSlots; i++) {
+        const angle = startAngle + (i * (2 * Math.PI / totalSlots));
+        const x = centerX + radius * Math.cos(angle);
+        const y = centerY + radius * Math.sin(angle);
+
+        const slotElem = document.getElementById(`slot-${i}`);
+        if (slotElem) {
+          slotElem.style.left = `${x}px`;
+          slotElem.style.top = `${y}px`;
+        }
+      }
+    }
+
+    /* 5. PHOTO SLOT MANAGEMENT */
     let activeSlotIndex = null;
     const photoCaptions = [
       "\"In the story of my life, having you as a friend is my absolute favorite chapter.\" ✨",
@@ -406,7 +453,7 @@
       const file = event.target.files[0];
       if (!file || activeSlotIndex === null) return;
 
-      let slots = JSON.parse(localStorage.getItem('friendship_grid_around_wish') || '[]');
+      let slots = JSON.parse(localStorage.getItem('friendship_circle_orbit_data') || '[]');
       
       const base64 = await readFileAsDataURL(file);
       slots[activeSlotIndex] = {
@@ -414,7 +461,7 @@
         caption: photoCaptions[activeSlotIndex] || "Special Memory ✨"
       };
 
-      localStorage.setItem('friendship_grid_around_wish', JSON.stringify(slots));
+      localStorage.setItem('friendship_circle_orbit_data', JSON.stringify(slots));
       renderSlots();
       event.target.value = '';
     }
@@ -429,7 +476,7 @@
     }
 
     function renderSlots() {
-      let slots = JSON.parse(localStorage.getItem('friendship_grid_around_wish') || '[]');
+      let slots = JSON.parse(localStorage.getItem('friendship_circle_orbit_data') || '[]');
 
       for (let i = 0; i < 5; i++) {
         const slotElem = document.getElementById(`slot-${i}`);
@@ -456,3 +503,4 @@
   </script>
 </body>
 </html>
+
